@@ -8,7 +8,9 @@ import atexit
 
 from ..misc import dist_utils
 from ..core import BaseConfig
-
+import wandb
+import os
+os.environ['WANDB_API_KEY'] = '02ba155e26496a78f062f683274330566fefe94c'
 
 def to(m: nn.Module, device: str):
     if m is None:
@@ -37,6 +39,10 @@ class BaseSolver(object):
             169, 70, 328, 226
         ]
     def _setup(self):
+        try:
+            wandb.init()
+        except:
+            print("Wandb is not ultilized")
         """Avoid instantiating unnecessary classes"""
         cfg = self.cfg
         if cfg.device:
