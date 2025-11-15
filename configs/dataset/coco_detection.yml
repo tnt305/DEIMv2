@@ -4,38 +4,38 @@ evaluator:
   type: CocoEvaluator
   iou_types: ['bbox', ]
 
-num_classes: 80
+num_classes: 1
 remap_mscoco_category: True
 
-train_dataloader: 
+train_dataloader:
   type: DataLoader
-  dataset: 
+  dataset:
     type: CocoDetection
-    img_folder: /datassd/COCO/train2017/
-    ann_file: /datassd/COCO/annotations/instances_train2017.json
+    img_folder: /kaggle/input/dronev1/coco_fold/coco_fold_0/train
+    ann_file: /kaggle/input/dronev1/coco_fold/coco_fold_0/train/_annotations.coco.json
     return_masks: False
     transforms:
       type: Compose
       ops: ~
   shuffle: True
-  num_workers: 4
-  drop_last: True 
+  num_workers: 8
+  drop_last: True
   collate_fn:
     type: BatchImageCollateFunction
 
 
 val_dataloader:
   type: DataLoader
-  dataset: 
+  dataset:
     type: CocoDetection
-    img_folder: /datassd/COCO/val2017/
-    ann_file: /datassd/COCO/annotations/instances_val2017.json
+    img_folder: /kaggle/input/dronev1/coco_fold/coco_fold_0/valid
+    ann_file: /kaggle/input/dronev1/coco_fold/coco_fold_0/valid/_annotations.coco.json
     return_masks: False
     transforms:
       type: Compose
-      ops: ~ 
+      ops: ~
   shuffle: False
-  num_workers: 4
+  num_workers: 8
   drop_last: False
   collate_fn:
     type: BatchImageCollateFunction
